@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Personal Portfolio</title>
+  <style>
+    body {
+      background: url('plm.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .container {
+      text-align: center;
+      margin-top: 400px;
+      color: #FFFFFF;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 150px;
+    }
+
+    .logo {
+      width: 200px;
+      height: 200px;
+      transition: filter 0.3s ease;
+    }
+
+    .logo-container:hover .logo {
+      filter: blur(8px);
+    }
+
+    .link {
+      color: #FFFFFF;
+      text-decoration: none;
+      margin: 10px;
+      font-size: 20px;
+      filter: blur(8px);
+      transition: filter 0.3s ease;
+    }
+
+    .link:hover {
+      filter: none;
+    }
+
+    .text-overlay {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      pointer-events: none;
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+
+    .text-overlay h1 {
+      font-size: 0;
+    }
+  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap">
+</head>
+<body>
+  <div class="text-overlay">
+    <div class="logo-container">
+      <img src="abnormalize.png" alt="Logo" class="logo">
+    </div>
+  </div>
+  <div class="container">
+    <a href="https://www.instagram.com/abnrmlyze" class="link">Instagram</a>
+    <a href="https://abnormalize.bigcartel.com/" class="link">Website</a>
+    <a href="https://www.twitter.com/sxverance" class="link">Twitter</a>
+  </div>
+
+  <script>
+    var logoContainer = document.querySelector('.logo-container');
+
+    logoContainer.addEventListener('mouseover', function() {
+      var logo = this.querySelector('.logo');
+      logo.style.filter = 'none';
+    });
+
+    logoContainer.addEventListener('mouseout', function() {
+      var logo = this.querySelector('.logo');
+      logo.style.filter = 'blur(8px)';
+    });
+
+    var links = document.getElementsByClassName('link');
+
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('mouseover', function() {
+        this.style.filter = 'none';
+      });
+
+      links[i].addEventListener('mouseout', function() {
+        this.style.filter = 'blur(8px)';
+      });
+    }
+  </script>
+</body>
+</html>
