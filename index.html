@@ -76,18 +76,104 @@
     .text-overlay h1 {
       font-size: 0;
     }
+
+    
+    .menu {
+      position: fixed;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      text-align: center;
+    }
+
+    .menu-toggle {
+      color: #ffffff;
+      font-size: 24px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .menu-items {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-items.show {
+      opacity: 1;
+      max-height: 500px;
+      transition: max-height 0.5s ease, opacity 0.3s ease;
+    }
+
+    .menu-item {
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-item.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .menu-item a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-item a:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    
   </style>
-   <link rel="stylesheet" href=style.css>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="menu">
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="menu-items" id="menuItems">
+      <div class="menu-item">
+        <a href="https://www.instagram.com/abnrmlyze">Instagram</a>
+      </div>
+      <div class="menu-item">
+        <a href="https://abnormalize.bigcartel.com/">Showcase</a>
+      </div>
+      <div class="menu-item">
+        <a href="https://www.twitter.com/sxverance">Twitter</a>
+      </div>
+    </div>
+  </div>
   <div class="announcement">
-    <p>“Your memory may save your life.” </p>
+    <p>“Your memory may save your life.”</p>
   </div>
   <div class="text-overlay">
     <div class="logo-container">
       <img src="osas.gif" alt="Logo" class="logo">
     </div>
-  
   </div>
   <div class="container">
     <a href="https://www.instagram.com/abnrmlyze" class="link">Instagram</a>
@@ -95,7 +181,7 @@
     <a href="https://www.twitter.com/sxverance" class="link">Twitter</a>
   </div>
   <div class="announcement2">
-     New updates coming soon!
+    New updates coming soon!
   </div>
 
   <div class="copyright">
@@ -125,6 +211,25 @@
       links[i].addEventListener('mouseout', function() {
         this.style.filter = 'blur(8px)';
       });
+    }
+
+    function toggleMenu() {
+      var menuItems = document.getElementById('menuItems');
+      menuItems.classList.toggle('show');
+
+      var menuToggle = document.querySelector('.menu-toggle');
+      menuToggle.classList.toggle('active');
+
+      var menuItemsList = menuItems.getElementsByClassName('menu-item');
+      for (var i = 0; i < menuItemsList.length; i++) {
+        if (menuItems.classList.contains('show')) {
+          setTimeout(function(item) {
+            item.classList.add('show');
+          }, i * 100, menuItemsList[i]);
+        } else {
+          menuItemsList[i].classList.remove('show');
+        }
+      }
     }
   </script>
 </body>
