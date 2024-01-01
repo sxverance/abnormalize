@@ -9,6 +9,20 @@
       font-family: 'Roboto Mono', monospace;
     }
 
+    <audio id="audioPlayer" controls>
+    <source src="dp.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+     
+     <button onclick="playAudio()">Play Audio</button>
+      
+    <script>
+    function playAudio() {
+      var audio = document.getElementById('audioPlayer');
+      audio.play();
+    }
+  </script>
+    
     .container {
       text-align: center;
       margin-top: 400px;
