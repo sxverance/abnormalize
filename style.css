@@ -1,199 +1,450 @@
+/* ===========================
+   INTRO SCREEN STYLING
+   =========================== */
+.intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Highest layer */
+  opacity: 1;
+  transition: opacity 1s ease;
+  flex-direction: column;
+}
+
+.intro-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Wrapper for loader content */
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Intro title */
+.intro-text {
+  color: white;
+  font-size: 2rem;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: textFadeIn 2s ease forwards;
+}
+
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Loading ring animation */
+.loading-ring {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading text */
+.loading-text {
+  color: white;
+  font-size: 16px;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+/* ===========================
+   EXISTING STYLES
+   =========================== */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Background GIF */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url('lain.gif') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Semi-transparent overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+/* Snow container */
+.snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Snowflake style */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: #fff;
+  font-size: 1em;
+  user-select: none;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* Content container */
+.content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo */
 .logo {
-    width: 200px;
-    height: 200px;
-    transition: filter 0.3s ease;
-    animation: rotateLogo 3s infinite linear, scaleLogo 2s infinite alternate;
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+/* Transparent rectangular button */
+.toggle-btn {
+  padding: 10px 30px;
+  border: 2px solid hsl(313, 73%, 75%);
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Panel */
+.panel {
+  margin-top: 20px;
+  width: 300px;
+  max-height: 0;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 10px;
+  transition: max-height 0.5s ease, padding 0.3s ease;
+  padding: 0;
+}
+
+.panel.open {
+  max-height: 300px;
+  padding: 10px 0;
+}
+
+/* Section links */
+.section {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  margin: 8px 0;
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  border: 2px solid hsl(313, 73%, 75%);
+  border-radius: 4px;
+  background: transparent;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.section:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+/* Logo bounce animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
   }
-  
-  @keyframes rotateLogo {
-    0% {
-      transform: rotate(0);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  40% {
+    transform: translateY(-20px); /* Upward movement */
   }
-  
-  @keyframes scaleLogo {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.2);
-    }
+  60% {
+    transform: translateY(-10px); /* Slight bounce back */
   }
-  
-  
-  .menu-toggle .hamburger {
-    display: inline-block;
-    width: 30px;
-    height: 20px;
-    position: relative;
-    cursor: pointer;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite; /* 2 seconds per bounce cycle */
+}
+/* ===========================
+   WINTER MESSAGE
+   =========================== */
+.winter-message {
+  position: fixed;
+  top: -30%; /* Starts off-screen */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 2rem;
+  text-align: center;
+  opacity: 0;
+  z-index: 9998;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+.winter-message.show {
+  animation: snowIn 3s forwards;
+}
+
+/* Snow-in animation for text */
+@keyframes snowIn {
+  0% {
+    top: -30%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
   }
-  
-  .hamburger span {
-    display: block;
-    position: absolute;
-    height: 2px;
-    width: 100%;
-    background-color: #ffffff;
-    transition: background-color 0.3s ease;
+  50% {
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
-  
-  .hamburger span:nth-child(1) {
-    top: 0;
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
   }
-  
-  .hamburger span:nth-child(2),
-  .hamburger span:nth-child(3) {
-    top: 9px;
+  100% {
+    opacity: 0;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
   }
-  
-  .hamburger span:nth-child(4) {
-    bottom: 0;
+}
+
+/* ===========================
+   SPARKLES
+   =========================== */
+.sparkles {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+}
+
+.sparkles::before,
+.sparkles::after {
+  content: "✨";
+  position: absolute;
+  font-size: 1.5rem;
+  color: #fff8dc;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+.sparkles::after {
+  left: 80px;
+  animation-delay: 1s;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
   }
-  
-  
-  .menu-toggle.active .hamburger span:nth-child(1) {
-    top: 9px;
-    transform: rotate(45deg);
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
   }
-  
-  .menu-toggle.active .hamburger span:nth-child(2) {
-    background-color: transparent;
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(360deg);
   }
-  
-  .menu-toggle.active .hamburger span:nth-child(3) {
-    top: 9px;
-    transform: rotate(-45deg);
+}
+
+/* ===========================
+   INNER SNOWFLAKES
+   =========================== */
+.inner-snow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.inner-snowflake {
+  position: absolute;
+  top: -10px;
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0.8;
+  animation: innerFall linear infinite;
+}
+
+@keyframes innerFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
   }
-  
-  
-  
-  
-  
-  
-  .announcement {
-    background-color: rgba(34, 33, 33, 0.7);
-    color: #ccc9c9;
-    padding: 5px;
-    font-size: 16px;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    animation: slideDown 1s ease-in-out, pulse 2s infinite;
+  100% {
+    transform: translateY(120px) rotate(360deg);
   }
-  
-  @keyframes slideDown {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(0);
-    }
+}
+/* Glittering text and fall */
+.glitter-text {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 
+    0 0 5px #fff, 
+    0 0 10px #fff, 
+    0 0 15px #ffd700, 
+    0 0 20px #ff69b4, 
+    0 0 25px #00ffff;
+  animation: glitter 1.5s infinite alternate, fallDown 5s forwards;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes glitter {
+  0% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700, 0 0 20px #ff69b4, 0 0 25px #00ffff;
   }
-  
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0.9);
-    }
+  50% {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 25px #ffd700, 0 0 30px #ff69b4, 0 0 35px #00ffff;
   }
-  
-  .announcement2 {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 16px;
-    animation: slideIn 8s ease-in-out infinite;
+  100% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700, 0 0 20px #ff69b4, 0 0 25px #00ffff;
   }
-  
-  @keyframes slideIn {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+}
+
+/* Falling down */
+@keyframes fallDown {
+  0% { top: -10%; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Trail particles */
+.trail-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.trail-particle {
+  position: absolute;
+  color: #fff;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: trailFall linear forwards;
+}
+
+@keyframes trailFall {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
   }
-  
-  .copyright {
-      position: fixed;
-      bottom: 10px;
-      left: 52%;
-      transform: translateX(-50%);
-      color: white;
-      font-size: 12px;
-      animation: fadeIn 1s ease-in-out forwards;
-    }
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  100% {
+    transform: translate(var(--x, 0px), var(--y, 50px)) scale(0.3);
+    opacity: 0;
   }
-  
-  /* cyrillic-ext */
-  @font-face {
-    font-family: 'Roboto Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_SeW4Ep0.woff2) format('woff2');
-    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-  }
-  /* cyrillic */
-  @font-face {
-    font-family: 'Roboto Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_QOW4Ep0.woff2) format('woff2');
-    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-  }
-  /* greek */
-  @font-face {
-    font-family: 'Roboto Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_R-W4Ep0.woff2) format('woff2');
-    unicode-range: U+0370-03FF;
-  }
-  /* vietnamese */
-  @font-face {
-    font-family: 'Roboto Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_S-W4Ep0.woff2) format('woff2');
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-  }
-  /* latin-ext */
-  @font-face {
-    font-family: 'Roboto Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_SuW4Ep0.woff2) format('woff2');
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  /* latin */
-  @font-face {
-    font-family: 'Roboto Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_ROW4.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-  
+}
+.page-footer {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 14px;
+  opacity: 0; /* start hidden */
+  z-index: 3;
+  pointer-events: none;
+  letter-spacing: 1px;
+  transition: opacity 2s ease; /* smooth fade-in */
+}
+
+.page-footer.show {
+  opacity: 0.6; /* final visible opacity */
+}
+
+.overlay-gif {
+  position: fixed; /* stays in place */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* so buttons are clickable */
+  z-index: 1; /* above background, below content */
+  overflow: hidden;
+}
+
+.overlay-gif img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* covers entire container without stretching */
+}
